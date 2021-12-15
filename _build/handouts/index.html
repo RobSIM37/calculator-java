@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Calculator | Devmountain Foundations</title>
+
+      <link
+        href="_static/pygments.css"
+        rel="stylesheet"
+        type="text/css"
+      />
+      <link href="_static/devmountain.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+          <link rel="stylesheet" type="text/css" href="_static/devmountain.css" />
+          <link rel="stylesheet" type="text/css" href="_static/plot_directive.css" />
+          <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+      <script src="_static/pdfobject.min.js"></script>
+      
+  </head>
+  <body>
+      <div id="handouts-container">
+        <header id="page-header">
+            <p id="project-title">Devmountain Foundations</p>
+            <p id="page-title">Calculator</p>
+              <p id="backlink">
+                <a href="/"> &laquo; Back to Homepage </a>
+              </p>
+        </header>
+
+        <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Calculator</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#id1">Introduction</a><ul>
+<li><a class="reference internal" href="#calculators-and-notation">Calculators and Notation</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#completing-functions-for-a-calculator-app">Completing Functions for a Calculator App</a><ul>
+<li><a class="reference internal" href="#how-the-app-works">How the App Works</a></li>
+<li><a class="reference internal" href="#finish-arithmetic-java">Finish <cite>Arithmetic.java</cite></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-study">Further Study</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+        <main id="page-content">
+            <section class="section" id="calculator">
+<h1>Calculator</h1>
+<section class="section" id="introduction">
+<h2>Introduction</h2>
+<p>This exercise will have you complete functions to finish implementing a
+prefix calculator CLI application (an application that runs in the terminal).</p>
+<p>The calculator lets a user add, subtract, multiply, divide, square a
+number, cube a number, raise a number to a given power, and find the remainder
+when one number is divided by another (otherwise known as taking one number
+<cite>mod</cite> another).</p>
+</section>
+<section class="section" id="setup">
+<h2>Setup</h2>
+<p>Download the materials for this exercise <a class="reference external" href="https://ed.devmountain.com/materials/exercises/calculator-java.zip">here</a>.</p>
+<p>Once the materials have finished downloading, <cite>cd</cite> into the project directory.
+Then, initialize a Git repo, <cite>git add</cite> all relevant files, and make an initial
+commit.</p>
+</section>
+<section class="section" id="id1">
+<h2>Introduction</h2>
+<section class="section" id="calculators-and-notation">
+<h3>Calculators and Notation</h3>
+<p>We typically write math equations using <cite>infix notation</cite> like this —
+<code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">2</span></code> — where the operator (in this case, the plus sign) goes <em>inside</em>
+the numbers.</p>
+<p>Another way to write equations is with <cite>prefix notation</cite>. As the name implies,
+in prefix notation, operators go <em>before</em> the operands so, instead of
+<code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">+</span> <span class="pre">2</span></code>, you’d write <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">3</span> <span class="pre">2</span></code>.</p>
+<p>One advantage of prefix notation is the ability to have an arbitrary number of
+operands. For example, <code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">+</span> <span class="pre">3</span> <span class="pre">+</span> <span class="pre">2</span></code> in prefix notation is
+<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">4</span> <span class="pre">3</span> <span class="pre">2</span></code>.</p>
+<p>In this exercise, we will build a basic prefix calculator together. We
+will provide half of the program, and you will code the other half. We
+will use this idea to explore the concept of an <cite>application programming
+interface</cite>.</p>
+<p>Recall that a function has three key parts:</p>
+<ul class="simple">
+<li><p>The name of the function</p></li>
+<li><p>Its parameters or input</p></li>
+<li><p>What the function does and/or what it outputs</p></li>
+</ul>
+<p>Together, these three pieces of information are a functions’s <cite>signature</cite>.</p>
+<p>A function signature is a way of describing a function without going
+into the details of how it operates.</p>
+</section>
+</section>
+<section class="section" id="completing-functions-for-a-calculator-app">
+<h2>Completing Functions for a Calculator App</h2>
+<section class="section" id="how-the-app-works">
+<h3>How the App Works</h3>
+<p>We’ve provided a terminal-based prefix calculator app with your exercise
+materials as a Java file called <cite>Calculator.java</cite>. It relies on the other file
+we’ve included — <cite>calc/Arithmetic.java</cite>.</p>
+<p>First, let’s get oriented by compiling and running <cite>Calculator.java</cite> in your preferred command line.
+When the app starts, try adding 2 numbers together:</p>
+<pre class="console literal-block"> $ <span class="cmd">javac Calculator.java</span>
+ $ <span class="cmd">java Calculator</span>
+Enter your equation &gt;
+<span class="cmd">+ 1 2</span>
+10.0</pre>
+<p>As you can see, <cite>Calculator.java</cite> doesn’t work — <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span> <span class="pre">2</span></code> is definitely <em>not</em>
+<code class="docutils literal notranslate"><span class="pre">10</span></code>!</p>
+<p>This happens because <cite>Calculator.java</cite> relies on functions from <cite>Arithmetic.java</cite>
+and the problem with <cite>Arithmetic.java</cite> is… well… you should check it out
+and see for yourself. Why do you think <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span> <span class="pre">2</span></code> gave <code class="docutils literal notranslate"><span class="pre">10</span></code> instead of <code class="docutils literal notranslate"><span class="pre">3</span></code>?</p>
+<div class="admonition hint">
+<p class="admonition-title">The problem with <cite>Arithmetic.java</cite></p>
+<details class="admonition-body"><summary></summary><div class="admonition-body docutils container">
+<p>All the methods in this file return <code class="docutils literal notranslate"><span class="pre">10.0</span></code>.</p>
+</div>
+</details></div>
+</section>
+<section class="section" id="finish-arithmetic-java">
+<h3>Finish <cite>Arithmetic.java</cite></h3>
+<p>Your task is to complete the functions in <cite>Arithmetic.java</cite> so <cite>Calculator.java</cite>
+will actually work. Here’s an example of what the calculator should be able to
+do:</p>
+<pre class="console literal-block"> $ <span class="cmd">java Calculator</span>
+Enter your equation &gt; <span class="cmd">+ 1 2</span>
+3.0
+Enter your equation &gt; <span class="cmd">- 10 5</span>
+5.0
+Enter your equation &gt; <span class="cmd">* 2 3</span>
+6.0
+Enter your equation &gt; <span class="cmd">/ 7 2</span>
+3.5
+Enter your equation &gt; <span class="cmd">square 2</span>
+4.0
+Enter your equation &gt; <span class="cmd">cube 3</span>
+27.0
+Enter your equation &gt; <span class="cmd">pow 2 5</span>
+32.0
+Enter your equation &gt; <span class="cmd">mod 10 3</span>
+1.0
+Enter your equation &gt; <span class="cmd">q</span></pre>
+<p>You can start by fixing the <cite>add</cite> function so <code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">1</span> <span class="pre">2</span></code> prints the proper value
+to the screen. When you’re finished with <cite>add</cite>, run <cite>Calculator.java</cite> so you can
+test and double-check that your function works:</p>
+<pre class="console literal-block"> $ <span class="cmd">javac Calculator.java</span>
+ $ <span class="cmd">java Calculator</span>
+Enter your equation &gt; <span class="cmd">+ 1 2</span>
+3.0
+Enter your equation &gt; <span class="cmd">+ 100 2</span>
+102.0</pre>
+<p>Then — since you’ve just finished a unit of working code — you should stage
+and commit your changes:</p>
+<pre class="console literal-block">$ <span class="cmd">git add Arithmetic.java</span>
+$ <span class="cmd">git commit -am &quot;Completed add function&quot;</span></pre>
+<p>Rinse and repeat for the rest of the functions in <cite>Arithmetic.java</cite>.</p>
+<p><strong>Stop here and complete the functions in</strong> <cite>Arithmetic.java</cite><strong>. Move on
+to the next section when you’re done.</strong></p>
+</section>
+</section>
+<section class="section" id="further-study">
+<h2>Further Study</h2>
+<p>If you have time, move on to the <a class="reference external" href="further-study">Further Study</a>.</p>
+</section>
+</section>
+
+        </main>
+
+        <footer id="page-footer">
+            <p>&copy; 2021 Devmountain</p>
+        </footer>
+      </div>
+
+      <script src="_static/main.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+  </body>
+</html>
